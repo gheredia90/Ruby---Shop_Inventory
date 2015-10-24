@@ -1,15 +1,23 @@
 require 'date'
 
 class Item
- attr_reader :price
- def initialize(price, units)
-    @price = price * units
+ attr_accessor :price, :units, :unit_price
+ def initialize(unit_price, units)
+    @price = unit_price*units
+    @units = units
+    @unit_price = unit_price
  end
+
+ def decrease_unit
+    @units -= 1
+    @price = @unit_price*@units
+ end
+
 end
 
 class Fruits < Item
-  def initialize(price, units)
-    super(price, units)
+  def initialize(unit_price, units)
+    super(unit_price, units)
   end
 
   def apply_discount 
@@ -23,8 +31,8 @@ class Fruits < Item
 end  
 
 class HouseWares < Item
-  def initialize(price, units)
-    super(price, units)
+  def initialize(unit_price, units)
+    super(unit_price, units)
   end  
 
   def apply_discount
@@ -53,11 +61,11 @@ end
 
 
 
-# class Oranges < Fruits
-#   def initialize(price)
-#     super(price)
-#   end  
-# end
+class Oranges < Fruits
+  def initialize(unit_price, units)
+    super(unit_price, units)
+  end  
+end
 
 # class Bananas < Fruits
 #   def initialize(price)

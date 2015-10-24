@@ -1,7 +1,10 @@
 class Shop
 
+	attr_accessor :balance
+
 	def initialize(stock)
 		@stock = stock
+		@balance = 0
 	end	
 
 	def show_items_in_stock
@@ -9,7 +12,7 @@ class Shop
 	end
 	
 	def decrease_items_in_stock(item)
-		@stock.delete_item(item)
+		@stock.decrease_unit(item)
 	end	
 
 end
