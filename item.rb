@@ -8,12 +8,27 @@ class Item
     @unit_price = unit_price
  end
 
- def decrease_unit
-    @units -= 1
-    @price = @unit_price*@units
+ def decrease_unit(number_of_units)
+    if number_of_units >= @units
+      @units -= number_of_units
+      @price = @unit_price*@units
+      return true
+    end  
+    return false
  end
 
 end
+
+
+
+
+
+
+
+
+
+
+
 
 class Fruits < Item
   def initialize(unit_price, units)
@@ -43,22 +58,6 @@ class HouseWares < Item
     price  
   end
 end    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 class Oranges < Fruits

@@ -10,6 +10,10 @@ class ShoppingCart
   	@items.push(item)
   end
 
+  def delete_item(item)
+    @items.delete(item)
+  end  
+
   def apply_number_items_discount
     if @items.length > 5
       @total.price *= 0.9
@@ -21,6 +25,7 @@ class ShoppingCart
     @items.map{ |item| @total_price += item.apply_discount }
     apply_number_items_discount
     puts "Total Price: #{@total_price} EUR"
+    @total_price
   end  
 
 end
