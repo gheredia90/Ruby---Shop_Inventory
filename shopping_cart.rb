@@ -1,4 +1,6 @@
 class ShoppingCart
+
+  attr_accessor :name, :total_price, :items
   
   def initialize(name)
   	@name = name
@@ -18,7 +20,11 @@ class ShoppingCart
     if @items.length > 5
       @total.price *= 0.9
     end
-  end    
+  end  
+
+  def display_items
+    @items.map{|item| puts "   #{item.class}, #{item.units} units, #{item.unit_price} PBU"}
+  end  
 
   def calculate_total
     @total_price = 0

@@ -11,9 +11,11 @@ class Stock
 	end	
 
 	def decrease_unit(item)
-		if @items.include?(item)
-			@items[@items.find_index(item)].decrease_unit(item.units)
-			update_number_of_items
+		@items.each do |stock_item|
+			if stock_item.class == item.class
+				stock_item.decrease_unit(item.units)
+				update_number_of_items
+			end	
 		end	
 	end
 

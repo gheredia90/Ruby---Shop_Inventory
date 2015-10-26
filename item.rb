@@ -9,7 +9,7 @@ class Item
  end
 
  def decrease_unit(number_of_units)
-    if number_of_units >= @units
+    if number_of_units <= @units
       @units -= number_of_units
       @price = @unit_price*@units
       return true

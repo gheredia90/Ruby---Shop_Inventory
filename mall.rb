@@ -37,19 +37,27 @@ class Mall
 			puts "Add items to your cart please"
 			@user.current_shop.display_items_in_stock
 			selected_item_number = enter_item
-			if selected_item_number != 0
-				selected_item = @user.current_shop.items[selected_item_number - 1]
-				new_item = create_item(selected_item)			
-				@user.add_item_to_basket(new_item)
-			end	
+			check_item(selected_item_number)
+			@user.display_basket
 		end	
 	end
+
+	def check_item(selected_item_number)
+		if selected_item_number != 0
+			selected_item = @user.current_shop.items[selected_item_number - 1]
+			new_item = create_item(selected_item)
+			if new_item.units <= selected_item.units
+				@user.add_item_to_basket(new_item)
+			else
+				puts "Enter a valid number of units"	
+			end					
+		end	
+	end		
 
 	def create_item(selected_item)
 		item_name = selected_item.class.to_s
 		unit_price = selected_item.unit_price
 		units = enter_number_of_units
-		puts "#{selected_item.class}, #{units} units, #{unit_price} PBU added to the basket "
 		purchase_order = item_name + ".new(" + unit_price.to_s + ", " + units.to_s + ")"
 		new_item = eval purchase_order
 	end	
@@ -83,7 +91,7 @@ class Mall
 			select_shop
 			select_item	
 		end
-		#proceed with payment		
+		@user.pay		
 	end	
 
 end	

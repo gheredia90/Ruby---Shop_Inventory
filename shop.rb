@@ -17,7 +17,7 @@ class Shop
 		i = 1
 		puts "Available items in #{@name}"
 		@items.each do |item|
-			puts "#{i}. #{item.class}, #{item.units}, #{item.unit_price}"
+			puts "#{i}. #{item.class}, #{item.units} units, #{item.unit_price} PBU"
 			i += 1
 		end
 	end	
@@ -25,5 +25,11 @@ class Shop
 	def number_of_items_in_stock
 		@items.size
 	end	
+
+	def update_stock(shopping_cart)
+		shopping_cart.items.each do |item|
+			decrease_items_in_stock(item)
+		end	
+	end
 
 end

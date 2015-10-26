@@ -17,23 +17,24 @@ class Customer
 		@shopping_cart.delete_item(item)
 	end	
 
-	def check_shopping_cart
-		@shopping_cart.items.each do |item|
-			if @current_shop.items.include?(item) && @current_shop.decrease_items_in_stock(item) 
-				decrease_amount(item.price)
-			end
-		end
-	end
+	def display_basket		
+		puts "------------------------------------"	
+		puts "#{@shopping_cart.name}"
+		@shopping_cart.display_items
+		puts "------------------------------------"	
 
-	def pay
-		amount_to_pay = @shopping_cart.calculate_price
-		@amount -= amount_to_pay
-		@current_shop.update_stock(@shopping_cart)
 	end	
 
-	def decrease_amount(price)
-		@amount -= price
-	end
+	def pay
+		amount_to_pay = @shopping_cart.calculate_total
+		@amount -= amount_to_pay
+		@current_shop.update_stock(@shopping_cart)
+		@shopping_cart.items = []
+		puts "Shopping cart: #{@shopping_cart.items}"
+		@current_shop.display_items_in_stock
+	end	
+
+	
 	
 
 end
